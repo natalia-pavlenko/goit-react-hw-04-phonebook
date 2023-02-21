@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {
   FormWrapper,
   FormDiv,
@@ -20,7 +20,7 @@ import {
 //    return [state, setState];
 //  };
 
-const ContactForm = ({onSubmit}) => {
+const ContactForm = ({ onSubmit }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -40,10 +40,10 @@ const ContactForm = ({onSubmit}) => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit(name, number);
+    onSubmit({ name, number });
   };
 
-    return (
+  return (
     <FormWrapper>
       <form onSubmit={handleSubmit}>
         <FormDiv>
@@ -82,12 +82,11 @@ const ContactForm = ({onSubmit}) => {
   );
 };
 
-
-// ContactForm.propTypes = {
-//   name: PropTypes.string,
-//   number: PropTypes.string,
-//   handleChange: PropTypes.func,
-//   handleSubmit: PropTypes.func,
-// };
+ContactForm.propTypes = {
+  name: PropTypes.string,
+  number: PropTypes.string,
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+};
 
 export default ContactForm;
