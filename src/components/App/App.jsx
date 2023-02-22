@@ -14,29 +14,34 @@ const App = () => {
   const [contacts, setContacts] = useState(
     () => JSON.parse(window.localStorage.getItem('saved')) ?? []
   );
-  const [filter, setFilter] = useState(' ');
+
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
+    console.log('contacts useEffect');
     localStorage.setItem('saved', JSON.stringify(contacts));
   }, [contacts]);
+
   const handleSubmit = ({ name, number }) => {
     const contact = {
       name: name,
       number: number,
       id: nanoid(),
     };
+
     console.log(contact);
     const existingUser = contacts.find(user => user.name === contact.name);
     if (existingUser) {
-      alert(`${contact.name}is alredy in contacts`);
+      alert(`${contact.name}  is alredy in contacts`);
       return;
     }
 
     setContacts(prevState => [...prevState, contact]);
   };
+
   const handelFilterInput = event => {
     const { value } = event.target;
-    setFilter({ filter: value });
+    setFilter(value);
   };
 
   const renderContacts = () => {
@@ -45,10 +50,14 @@ const App = () => {
     );
   };
 
+  // const handelDelete = id => {
+  //   setContacts(prevState => ({
+  //     contacts: prevState.contacts.filter(contact => contact.id !== id),
+  //   }));
+  // };
+
   const handelDelete = id => {
-    setContacts(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== id),
-    }));
+    setContacts(prevState => prevState.filter(contact => contact.id !== id));
   };
   return (
     <>
@@ -62,5 +71,4 @@ const App = () => {
     </>
   );
 };
-
 export default App;

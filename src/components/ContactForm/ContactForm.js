@@ -38,11 +38,13 @@ const ContactForm = ({ onSubmit }) => {
         return;
     }
   };
+
   const handleSubmit = e => {
     e.preventDefault();
     onSubmit({ name, number });
+    setName('');
+    setNumber('');
   };
-
   return (
     <FormWrapper>
       <form onSubmit={handleSubmit}>
